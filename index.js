@@ -15,3 +15,19 @@ function renderBooks(books) {
 document.addEventListener('DOMContentLoaded', function() {
   fetchBooks();
 });
+function fetchBooks() {
+  const url = "https://anapioficeandfire.com/api/books";
+  return fetch(url)
+    .then((resp) => {
+      if (!resp.ok) {
+        throw new Error("Failed to fetch books");
+      }
+      return resp.json();
+    })
+    .then((books) => {
+      renderBooks(books); 
+    })
+    .catch((error) => {
+      console.error("Error fetching books:", error);
+    });
+}
